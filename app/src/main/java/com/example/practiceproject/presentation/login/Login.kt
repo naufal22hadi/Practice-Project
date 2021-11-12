@@ -49,6 +49,9 @@ class Login : AppCompatActivity() {
 
     }
 
+    /**
+     * This must be removed
+     */
 //    private suspend fun getData(){
 //        if (viewModel.getLocalData().isNotEmpty()){
 //            userDataBase()
