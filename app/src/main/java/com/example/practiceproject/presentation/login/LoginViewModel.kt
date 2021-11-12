@@ -44,7 +44,6 @@ class LoginViewModel(private val loginUseCase: LoginUseCase): ViewModel() {
             val localData = loginUseCase.getUserLocalData()
             _localUserData.value = localData
         }
-
     }
 
     fun insertData(userDataEntity: List<UserDataEntity>){
@@ -61,7 +60,8 @@ class LoginViewModel(private val loginUseCase: LoginUseCase): ViewModel() {
                 getUserData()
             }
         }
-
     }
+
+    fun getData(){}
 
 }
