@@ -64,4 +64,6 @@ class LoginViewModel(private val loginUseCase: LoginUseCase): ViewModel() {
 
     fun getData(){}
 
+    fun getData1(){}
+
 }
