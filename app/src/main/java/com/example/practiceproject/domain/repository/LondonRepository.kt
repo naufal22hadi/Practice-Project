@@ -22,7 +22,8 @@ class LondonRepository(private val userDao : UserDao){
     }
 
     suspend fun getLocalData(): List<UserDataEntity>{
-        return userDao.getData()
+        return userDao.getUserLocalData()
     }
+
 
 }

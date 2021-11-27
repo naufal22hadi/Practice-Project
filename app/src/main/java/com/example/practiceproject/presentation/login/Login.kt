@@ -15,10 +15,12 @@ import com.example.practiceproject.domain.repository.LondonRepository
 import com.example.practiceproject.domain.use_case.LoginUseCase
 import com.example.practiceproject.presentation.adapter.UserAdapter
 import kotlinx.android.synthetic.main.activity_login.*
+import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.getViewModel
 
 class Login : AppCompatActivity() {
 
-    private lateinit var viewModel : LoginViewModel
+    private val viewModel by inject<LoginViewModel>()
     private lateinit var userAdapter : UserAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,11 +30,6 @@ class Login : AppCompatActivity() {
 //        weatherData()
         setupRecyclerview()
 
-        val userDao = UserDatabase.getDatabase(application).userDao()
-        val repository = LondonRepository(userDao)
-        val viewModelFactory = LoginViewModelFactory(LoginUseCase(repository))
-
-        viewModel = ViewModelProvider(this,viewModelFactory).get(LoginViewModel::class.java)
         viewModel.getDataContent()
         viewModel.userData.observe(this, Observer { response ->
             if (response.isSuccessful){
