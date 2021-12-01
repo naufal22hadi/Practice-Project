@@ -15,11 +15,11 @@
         android:theme="@style/Theme.PracticeProject">
 
         <activity
-            android:name=".presentation.mainpage.MainPage"
+            android:name=".presentation.mainpage.MainPageActivity"
             android:exported="true" />
 
         <activity
-            android:name=".presentation.login.Login"
+            android:name=".presentation.login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

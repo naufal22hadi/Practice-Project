@@ -1,22 +1,23 @@
 package com.example.practiceproject.util
 
 import com.example.practiceproject.data.database.UserDatabase
-import com.example.practiceproject.data.remote.RetrofitInstance
 import com.example.practiceproject.data.remote.RetrofitInstanceUser
 import com.example.practiceproject.data.remote.UserAPI
-import com.example.practiceproject.data.remote.UserDao
 import com.example.practiceproject.domain.repository.LondonRepository
 import com.example.practiceproject.domain.use_case.LoginUseCase
 import com.example.practiceproject.presentation.login.LoginViewModel
+import com.example.practiceproject.presentation.mainpage.MainPageViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
 
-
 val viewmodelModule = module {
     viewModel {
         LoginViewModel(get())
+    }
+    viewModel {
+        MainPageViewModel(get())
     }
 }
 
@@ -28,7 +29,7 @@ val usecaseModule = module {
 
 val repositoryModule = module {
     single{
-        LondonRepository(get())
+        LondonRepository(get(),get())
     }
 }
 
@@ -44,9 +45,17 @@ val localModule = module {
     }
 }
 
+val sharedPref = module {
+    single {
+        SharedPreferences(get())
+    }
+}
+
 val appModule : List<Module> = listOf(
     viewmodelModule,
     usecaseModule,
     repositoryModule,
     networkModule,
-    localModule)
+    localModule,
+    sharedPref
+)

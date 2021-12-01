@@ -1,13 +1,12 @@
 package com.example.practiceproject.presentation.mainpage
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.practiceproject.R
-import com.example.practiceproject.presentation.login.LoginViewModel
 import kotlinx.android.synthetic.main.activity_main_page.*
 import org.koin.android.ext.android.inject
 
-class MainPage : AppCompatActivity() {
+class MainPageActivity : AppCompatActivity() {
 
     private val viewModel by inject<MainPageViewModel>()
 

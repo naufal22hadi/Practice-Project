@@ -11,14 +11,25 @@ class LoginUseCase(private val repository: LondonRepository){
     suspend fun getMyData() : Response<LondonData>{
         return repository.getLondon()
     }
+
     suspend fun getUserData(): Response<ArrayList<UserItem>>{
         return repository.getUser()
     }
+
     suspend fun insertUserData(userDataEntity: List<UserDataEntity>){
         repository.insertUserData(userDataEntity)
     }
+
     suspend fun getUserLocalData() : List<UserDataEntity> {
         return repository.getLocalData()
+    }
+
+    fun setSharedPrefName(name : String){
+        repository.setSharedPrefName(name)
+    }
+
+    fun getSharedPrefName() : String?{
+        return repository.getSharedPrefName()
     }
 
 }

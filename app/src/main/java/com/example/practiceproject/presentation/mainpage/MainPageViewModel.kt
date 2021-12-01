@@ -1,4 +1,11 @@
 package com.example.practiceproject.presentation.mainpage
 
-class MainPageViewModel {
+import androidx.lifecycle.ViewModel
+import com.example.practiceproject.domain.use_case.LoginUseCase
+
+class MainPageViewModel(private val loginUseCase: LoginUseCase) : ViewModel(){
+
+    fun getSharedPrefName() : String?{
+        return loginUseCase.getSharedPrefName()
+    }
 }

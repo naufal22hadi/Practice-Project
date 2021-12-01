@@ -4,23 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.practiceproject.R
-import com.example.practiceproject.data.database.UserDatabase
 import com.example.practiceproject.data.remote.dto.User.UserItem
 import com.example.practiceproject.data.remote.dto.UserDataEntity
 import com.example.practiceproject.data.remote.dto.toUserDataEntity
 import com.example.practiceproject.data.remote.dto.toUserDataItem
-import com.example.practiceproject.domain.repository.LondonRepository
-import com.example.practiceproject.domain.use_case.LoginUseCase
 import com.example.practiceproject.presentation.adapter.UserAdapter
-import com.example.practiceproject.presentation.mainpage.MainPage
+import com.example.practiceproject.presentation.mainpage.MainPageActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.getViewModel
 
-class Login : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private val viewModel by inject<LoginViewModel>()
     private lateinit var userAdapter : UserAdapter
@@ -29,7 +24,6 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-//        weatherData()
         setupRecyclerview()
 
         viewModel.getDataContent()
@@ -48,63 +42,12 @@ class Login : AppCompatActivity() {
 
     }
 
-    /**
-     * This must be removed
-     */
-//    private suspend fun getData(){
-//        if (viewModel.getLocalData().isNotEmpty()){
-//            userDataBase()
-//        }else{
-//            userData()
-//        }
-//    }
-
-//    private fun weatherData() {
-//        val userDao = UserDatabase.getDatabase(application).userDao()
-//        val repository = LondonRepository(userDao)
-//        val viewModelFactory = LoginViewModelFactory(LoginUseCase(repository))
-//        viewModel = ViewModelProvider(this,viewModelFactory).get(LoginViewModel::class.java)
-//        viewModel.getData()
-//        viewModel.myResponse.observe(this, { response ->
-//            textName.text = response.body()?.name
-//
-//        })
-//    }
-
-//    private fun userDataBase() {
-//        val userDao = UserDatabase.getDatabase(application).userDao()
-//        val repository = LondonRepository(userDao)
-//        val viewModelFactory = LoginViewModelFactory(LoginUseCase(repository))
-//        viewModel = ViewModelProvider(this, viewModelFactory).get(LoginViewModel::class.java)
-//        viewModel.getLocalData()
-//        viewModel.localUserData.observe(this, Observer {
-//            userAdapter.setUserData(mapDataItem(it))
-//        })
-//    }
-
-//    private fun userData(){
-//        val userDao = UserDatabase.getDatabase(application).userDao()
-//        val repository = LondonRepository(userDao)
-//        val viewModelFactory = LoginViewModelFactory(LoginUseCase(repository))
-//        viewModel = ViewModelProvider(this,viewModelFactory).get(LoginViewModel::class.java)
-//        viewModel.getUserData()
-//        viewModel.userData.observe(this, Observer {response->
-//            if (response.isSuccessful){
-//                response.body()?.let { its ->
-//                    userAdapter.setUserData(its)
-//                    mapData(its)
-//
-//                }
-//            }
-//        })
-//    }
-
     private fun setupRecyclerview(){
         userAdapter = UserAdapter(object :UserAdapter.ItemListener{
             override fun userCLicked(memberUser: UserItem) {
                 val name = memberUser.name
                 viewModel.setSharedPrefName(name)
-                val intent = Intent(this@Login,MainPage::class.java)
+                val intent = Intent(this@LoginActivity,MainPageActivity::class.java)
                 startActivity(intent)
             }
 
