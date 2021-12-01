@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.practiceproject.R
 import com.example.practiceproject.data.remote.dto.User.UserItem
 
-class UserAdapter: RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class UserAdapter(private val itemListener : ItemListener): RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     private var memberUsers = emptyList<UserItem>()
 
@@ -33,6 +33,9 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
         holder.userEmail.text = memberUser.email
         holder.userUsername.text = memberUser.username
         holder.userWebsite.text = memberUser.website
+        holder.itemView.setOnClickListener {
+            itemListener.userCLicked(memberUser)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -47,7 +50,9 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
         val userEmail : TextView = itemView.findViewById(R.id.userEmail)
         val userUsername : TextView = itemView.findViewById(R.id.userUsername)
         val userWebsite : TextView = itemView.findViewById(R.id.userWebsite)
+    }
 
-
+    interface ItemListener{
+        fun userCLicked(memberUser : UserItem)
     }
 }
