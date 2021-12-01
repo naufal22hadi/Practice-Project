@@ -1,5 +1,6 @@
 package com.example.practiceproject.presentation.login
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -14,6 +15,7 @@ import com.example.practiceproject.data.remote.dto.toUserDataItem
 import com.example.practiceproject.domain.repository.LondonRepository
 import com.example.practiceproject.domain.use_case.LoginUseCase
 import com.example.practiceproject.presentation.adapter.UserAdapter
+import com.example.practiceproject.presentation.mainpage.MainPage
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.getViewModel
@@ -98,7 +100,15 @@ class Login : AppCompatActivity() {
 //    }
 
     private fun setupRecyclerview(){
-        userAdapter = UserAdapter()
+        userAdapter = UserAdapter(object :UserAdapter.ItemListener{
+            override fun userCLicked(memberUser: UserItem) {
+                val name = memberUser.name
+                viewModel.setSharedPrefName(name)
+                val intent = Intent(this@Login,MainPage::class.java)
+                startActivity(intent)
+            }
+
+        })
         userRecyclerview.adapter = userAdapter
         userRecyclerview.layoutManager = LinearLayoutManager(this)
         userRecyclerview.setHasFixedSize(true)
